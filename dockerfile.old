@@ -1,0 +1,16 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package.json .
+
+# Usar el flag --legacy-peer-deps para resolver conflictos de dependencias
+RUN npm install --legacy-peer-deps
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
